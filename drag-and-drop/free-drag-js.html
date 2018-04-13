@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自由拖拽-js实现</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box" class="box"></div>  
+</div>
+</body>
+<script>
+/**
+被拖拽元素及其相关事件
+*/
+var boxNode = document.getElementById('box');
+
+boxNode.addEventListener('mousedown', function(e) {
+  console.log('down');
+
+  // 获取鼠标点击时 鼠标相对元素的相对位置， 该相对位置在后续移动过程中是不变的
+  var offsetX = e.offsetX;
+  var offsetY = e.offsetY;
+
+  var move = function(e) {
+    /*
+      获取当前鼠标相对文档位置 
+      IE 不支持pageX
+    */
+    var x = 0, y = 0;
+    if(e.pageX) {
+      x = e.pageX;
+      y = e.pageY;
+    } else {
+      x = e.clientX + document.body.scrollLeft - document.body.clientLeft;
+      y = e.clientY + document.body.scrollTop - document.body.clientTop;
+    }
+
+    var max_width = document.body.scrollWidth -  boxNode.clientWidth;
+    var max_height = 1000 - boxNode.clientHeight;
+
+    console.log(max_width, max_height);
+
+    // 当前鼠标位置减去 相对元素的位置就是最终定位的位置
+    var move_x =  x - offsetX;
+    var move_y = y - offsetY;
+
+    boxNode.style.left = Math.min(Math.max(move_x,0), max_width) + 'px';
+    boxNode.style.top = Math.min(Math.max(move_y, 0), max_height) + 'px';
+  }
+
+  boxNode.addEventListener('mousemove', move);
+
+  // 当左键释放时 取消对move事件的监听
+  document.addEventListener('mouseup', function(e) {
+    boxNode.removeEventListener('mousemove', move);
+  })
+})
+
+
+
+</script>
+</html>

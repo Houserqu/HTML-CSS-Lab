@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>自由拖拽-drag实现</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box" class="box" draggable="true"></div>  
+</div>
+</body>
+<script>
+/**
+被拖拽元素及其相关事件
+*/
+var boxNode = document.getElementById('box');
+
+
+var transfer_data;
+
+// 被拖拽元素 开始拖拽时
+boxNode.addEventListener('dragstart', function(e){
+  transfer_data = {
+    offsetX: e.offsetX,
+    offsetY: e.offsetY
+  }
+
+  //dataTransfer.setData()方法设置一次拖拽事件对象的自定义属性，能够被目标容易获取到
+  e.my = 123123123;
+  console.log('start', e);
+})
+
+// 被拖拽元素 处于拖拽过程时 一直触发
+boxNode.addEventListener('drag', function(e){
+  console.log('drag');
+
+})
+
+// 被拖拽元素 结束拖拽时 触发 
+boxNode.addEventListener('dragend', function(e){
+  console.log('dragend', e);
+  var data = e.dataTransfer.getData('text');
+  console.log(data);
+
+  var x =  e.clientX - transfer_data.offsetX;
+  var y = e.clientY - transfer_data.offsetY;
+  console.log(x,y);
+  boxNode.style.left = x + 'px';
+  boxNode.style.top = y + 'px';
+})
+
+</script>
+</html>

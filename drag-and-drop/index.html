@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>目标-容器拖拽效果</title>
+  <style>
+    .main {
+      display: flex
+    }
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+       left: 0;
+      top: 0;
+    }
+
+    .container {
+      width: 400px;
+      height: 300px;
+      border: solid 1px #000
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+      <div id="box" class="box" draggable="true"></div>  
+      <div class="container" id="container">
+  </div>
+</div>
+</body>
+<script>
+/**
+被拖拽元素及其相关事件
+*/
+var boxNode = document.getElementById('box');
+
+
+// 被拖拽元素 开始拖拽时
+boxNode.addEventListener('dragstart', function(e){
+
+  //dataTransfer.setData()方法设置一次拖拽事件对象的自定义属性，能够被目标容易获取到
+  e.dataTransfer.setData("text", e.target.id);
+  
+  console.log('start', e.dataTransfer.getData('text'));
+})
+
+// 被拖拽元素 处于拖拽过程时 一直触发
+boxNode.addEventListener('drag', function(e){
+  //console.log('drag');
+})
+
+// 被拖拽元素 结束拖拽时 触发 
+boxNode.addEventListener('dragend', function(e){
+  console.log('dragend', e);
+})
+
+/**
+目标容器及其相关事件
+*/
+
+var containerNode = document.getElementById("container");
+
+// 被拖拽元素 在接受容器上释放时触发
+containerNode.addEventListener("drop", function(e){
+  console.log('drop', e);
+
+  // dataTransfer.getData() 只能在drop事件才能获取
+  var target_id = e.dataTransfer.getData('text');
+  e.target.appendChild(document.getElementById(target_id));
+})
+
+// 被拖拽元素 在接受容器上拖动时触发 一直触发
+containerNode.addEventListener("dragover", function(e) {
+  console.log('container over');
+  e.preventDefault();
+})
+
+// 被拖拽元素 进入 接受容器时触发
+containerNode.addEventListener("dragenter", function() {
+  console.log('enter')
+})
+
+// 被拖拽元素 离开 接受容器上拖动时触发
+containerNode.addEventListener("dragleave", function() {
+  console.log('leave')
+})
+
+</script>
+</html>
