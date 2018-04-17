@@ -50,8 +50,6 @@ boxNode.addEventListener('drag', function(e){
 // 被拖拽元素 结束拖拽时 触发 
 boxNode.addEventListener('dragend', function(e){
   console.log('dragend', e);
-  var data = e.dataTransfer.getData('text');
-  console.log(data);
 
   var x =  e.clientX - transfer_data.offsetX;
   var y = e.clientY - transfer_data.offsetY;

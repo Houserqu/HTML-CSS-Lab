@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Transition 过渡</title>
+  <style>
+    .a {
+      /* 简写 */
+      transition: 2s 1s width ease-out, 2s height;
+      -moz-transition: 2s 1s width, 2s height;	/* Firefox 4 */
+      -webkit-transition: 2s 1s width, 2s height cubic-bezier(.83,.97,.05,1.44);	/* Safari 和 Chrome */
+      -o-transition: 2s 1s width, 2s height;	/* Opera */
+
+      /* 分开写 */
+      /*
+      transition-property: width;
+      transition-duration: 1s;
+      transition-timing-function: linear;
+      transition-delay: 2s;
+      */
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    /* .a:hover {
+      background-color: aqua;
+      height: 200px;
+      width: 200px;
+    } */
+  </style>
+</head>
+<body>
+  <div class="a" id="a"></div>
+</body>
+<script>
+  var node_a = document.getElementById('a')
+  node_a.addEventListener('click', function(){
+    console.log('a');
+    node_a.style.width = '200px';
+    node_a.style.height = '200px';
+  })
+</script>
+</html>
