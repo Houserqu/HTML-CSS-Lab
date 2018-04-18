@@ -4,26 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
   <title>Animation</title>
   <style>
     .a {
       height: 100px;
       width: 100px;
       background-color: red;
+      animation-play-state: paused;
+      animation: rainbow 1s linear 1s infinite alternate;
+
     }
 
-    .a:hover{
-      animation:1s rainbow infinite reverse steps(10);
-    }
+    /* .a:hover{
+      animation: rainbow 1s linear 1s infinite alternate;
+      animation-play-state: running;
+    } */
 
     @keyframes rainbow {
-      0% {
-        background-color: black;
-      }
-
       100% {
-        width: 200px;
-
+        margin-left: 300px;
         background-color: blue;
         transform: rotate(1turn)
       }
@@ -32,6 +32,14 @@
 </head>
 <body>
     <div class="a" id="a"></div>
-
+    <div id="b" class="animated infinite zoomInDown">hahahahha</div>
 </body>
+<script>
+  // var b = document.getElementById('b');
+  // b.addEventListener('click', function(){
+  //   console.log('b');
+  //   b.className = 'animated fadeInLeft';
+  // })
+  
+</script>
 </html>
