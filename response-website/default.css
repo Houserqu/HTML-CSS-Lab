@@ -1,0 +1,49 @@
+header {
+  width: 100%;
+  background-color: #bbd5c5;
+}
+
+header div {
+  float: left;
+}
+
+.head {
+}
+
+.more {
+  background: rgba(33,84,95,0.2);
+}
+
+.content {
+}
+
+.content > div {
+
+}
+
+.list {
+  background-color: bisque;
+}
+
+.content__requirements {
+  background-color: cadetblue
+}
+
+.content__participation {
+  background-color: cornflowerblue;
+}
+
+.list__question {
+  background-color: #bbd5c5
+}
+
+.list__otherpage {
+  background-color: #edf4f0
+}
+
+.head .head__title{
+  color: #fff;
+  text-align: center;
+  width: 100%;
+}
+
